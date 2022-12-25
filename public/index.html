@@ -2,37 +2,42 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stats</title>
+    <title>Artist Search</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body onload="loadArtist('4MCBfE4596Uoi2O4DtmEMz')">
+  <body onload="">
     <div class="container">
       <header>
-        <h1>Artist Stats</h1>
+        <h1>Artist Search</h1>
+        <nav>
+          <form id="search-form">
+            <label for="artist-name">Artist Name:</label>
+            <input type="text" id="artist-name-search" required />
+            <button type="submit">Search</button>
+          </form>
+        </nav>
       </header>
-      <nav>
-        <ul>
-          <li><a href="#">Overview</a></li>
-          <li><a href="#">Tracks</a></li>
-          <li><a href="#">Albums</a></li>
-          <li><a href="#">Related Artists</a></li>
-        </ul>
-      </nav>
       <main>
-        <div class="artist-info">
-          <img src="artist-image.jpg" alt="Artist image" />
-          <h2 id="artist-name">Artist Name</h2>
-        </div>
-        <div class="stats">
-          <h3>Stats</h3>
-          <ul>
-            <li id="arist-followers">Followers: </li>
-            <li>Plays: 123456</li>
-            <li>Scrobbles: 123456</li>
-          </ul>
-        </div>
+        <!-- A container for the search results -->
+        <div id="search-results"></div>
+
+        <!-- An HTML template for the artist card -->
+        <template id="artist-card-template">
+          <div class="artist-card" onclick="window.location='overview.html';">
+            <img class="artist-image" src="" alt="Artist image">
+            <h3 class="artist-name"></h3>
+            <p class="artist-followers" style="margin-left: 10px;">  Followers: </p>
+          </div>
+        </template>
       </main>
     </div>
-    <script src="get_json.js" charset="utf-8"></script>
   </body>
+  <script type="text/javascript">
+    window.onload = function() {
+      const searchForm = document.getElementById("search-form");
+      const artistNameSearch = document.getElementById("artist-name-search").value;
+      searchArtists(artistNameSearch);
+    }
+  </script>
+  <script src="get_json.js" charset="utf-8"></script>
 </html>

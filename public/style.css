@@ -91,3 +91,74 @@ main {
  .stats li {
  margin-bottom: 10px;
  }
+
+
+ nav {
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+ }
+
+ #search-form {
+   display: flex;
+   align-items: center;
+   width: 100%;
+ }
+
+ #search-form label {
+   margin-right: 0.5rem;
+   color: black;
+ }
+
+ #search-form input[type="text"] {
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   padding: 0.5rem;
+   width: 100%;
+ }
+
+ #search-form button[type="submit"] {
+   background-color: #1DB954;
+   border: 1px solid #1DB954;
+   border-radius: 4px;
+   color: white;
+   padding: 0.5rem;
+   cursor: pointer;
+ }
+
+
+ .artist-card {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   margin: 10px 0;
+   cursor: pointer;
+ }
+
+ .artist-image {
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   object-fit: cover;
+   margin-right: 10px;
+ }
+
+ .artist-name {
+   font-size: 18px;
+   font-weight: bold;
+ }
+
+ .artist-genre {
+   color: #666;
+   font-size: 14px;
+ }
+
+ .artist-popularity {
+   color: #666;
+   font-size: 14px;
+ }
+
+ .artist-followers {
+   color: #666;
+   font-size: 14px;
+ }
