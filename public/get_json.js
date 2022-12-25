@@ -69,22 +69,10 @@ async function searchArtists(query) {
     },
   });
   const data = await response.json();
-  console.log(data);
   renderArtistCards(data.artists.items);
   }
 
-  const searchForm = document.getElementById("search-form");
 
-  searchForm.addEventListener("submit", (event) => {
-  // Prevent the default form submission behavior
-  event.preventDefault();
-
-  // Get the artist name from the search form
-  const artistNameSearch = document.getElementById("artist-name-search").value;
-
-  // Search for artists
-  searchArtists(artistNameSearch);
-  });
 
 
 function renderArtistCards(artists) {
@@ -108,8 +96,53 @@ function renderArtistCards(artists) {
     }
     artistFollower = formatted.join('');
 
+    artistCardElement.querySelector('.artist-card').setAttribute("data-artist-id", artist.id);
     artistCardElement.querySelector('.artist-followers').insertAdjacentHTML("beforeend", artistFollower);
     artistCardElement.querySelector('.artist-image').src = artist.images[0].url;
     searchResultsElement.appendChild(artistCardElement);
   }
+}
+
+function openOverview(card) {
+  const artistId = card.getAttribute("data-artist-id");
+  window.location.href = `overview.html?artistId=${artistId}`;
+}
+
+
+async function loadOverview() {
+  const params = new URLSearchParams(window.location.search);
+  const artistId = params.get("artistId");
+  loadArtist(artistId);
+ }
+
+async function switchTabRelatedArtists() {
+  const currentURL = new URL(window.location.href);
+  const artistId = new URLSearchParams(currentURL.search).get('artistId');
+  window.location.href = `related-artists.html?artistId=${artistId}`;
+
+  console.log(artistId);
+}
+
+async function switchTabAlbums() {
+  const currentURL = new URL(window.location.href);
+  const artistId = new URLSearchParams(currentURL.search).get('artistId');
+  window.location.href = `albums.html?artistId=${artistId}`;
+
+  console.log(artistId);
+}
+
+async function switchTabTracks() {
+  const currentURL = new URL(window.location.href);
+  const artistId = new URLSearchParams(currentURL.search).get('artistId');
+  window.location.href = `tracks.html?artistId=${artistId}`;
+
+  console.log(artistId);
+}
+
+async function switchTabOverview() {
+  const currentURL = new URL(window.location.href);
+  const artistId = new URLSearchParams(currentURL.search).get('artistId');
+  window.location.href = `overview.html?artistId=${artistId}`;
+
+  console.log(artistId);
 }

@@ -93,10 +93,13 @@ main {
  }
 
 
+
+
  nav {
    display: flex;
    align-items: center;
-   justify-content: flex-end;
+   width: 100%;
+   justify-content: space-between;
  }
 
  #search-form {
@@ -125,6 +128,27 @@ main {
    padding: 0.5rem;
    cursor: pointer;
  }
+
+ #go-back-container {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+ }
+
+ #go-back-container a {
+   display: flex;
+   justify-content: flex-start;
+ }
+
+nav a {
+  cursor: pointer;
+}
+
+
+
+
+
+
 
 
  .artist-card {

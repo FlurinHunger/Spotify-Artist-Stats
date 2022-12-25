@@ -11,10 +11,14 @@
         <h1>Related Artists</h1>
       </header>
       <nav>
+        <div id="go-back-container">
+          <a href="#" onclick="parent.location='index.html'">Go Back</a>
+        </div>
         <ul>
-          <li><a href="overview.html">Overview</a></li>
-          <li><a href="tracks.html">Tracks</a></li>
-          <li><a href="albums.html">Albums</a></li>
+        <ul>
+          <li><a onclick="switchTabOverview()">Overview</a></li>
+          <li><a onclick="switchTabTracks()">Tracks</a></li>
+          <li><a onclick="switchTabAlbums()">Albums</a></li>
           <li><a href="#">Related Artists</a></li>
         </ul>
       </nav>
@@ -26,4 +30,5 @@
       </main>
     </div>
   </body>
+  <script src="get_json.js" charset="utf-8"></script>
 </html>

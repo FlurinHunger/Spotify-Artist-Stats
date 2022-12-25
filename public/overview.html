@@ -5,17 +5,20 @@
     <title>Stats</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body onload="loadArtist('4MCBfE4596Uoi2O4DtmEMz')">
+  <body onload="loadOverview()">
     <div class="container">
       <header>
         <h1>Artist Stats</h1>
       </header>
       <nav>
+        <div id="go-back-container">
+          <a href="#" onclick="parent.location='index.html'">Go Back</a>
+        </div>
         <ul>
           <li><a href="#">Overview</a></li>
-          <li><a href="tracks.html">Tracks</a></li>
-          <li><a href="albums.html">Albums</a></li>
-          <li><a href="related-artists.html">Related Artists</a></li>
+          <li><a onclick="switchTabTracks()">Tracks</a></li>
+          <li><a onclick="switchTabAlbums()">Albums</a></li>
+          <li><a onclick="switchTabRelatedArtists()">Related Artists</a></li>
         </ul>
       </nav>
       <main>
