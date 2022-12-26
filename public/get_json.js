@@ -29,8 +29,6 @@ async function loadArtist(artistId) {
   const artistGenre = artist.genres[0];
   const artistPopularity = artist.popularity;
 
-
-
   const numStr = artistFollower.toString();
   const numChars = numStr.split('');
   const formatted = [];
@@ -59,6 +57,60 @@ async function loadArtist(artistId) {
   const artistPopularityElement = document.getElementById("artist-popularity");
   artistPopularityElement.insertAdjacentHTML("beforeend", artistPopularity);
 }
+
+
+
+async function loadAlbums(artistId) {
+  // Make request to the Spotify API to get the artist's albums
+  const accessToken = await getAccessToken();
+  const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums`, {
+    headers: {
+      "Authorization": "Bearer " + accessToken,
+    },
+  });
+  const data = await response.json();
+
+  // Get the template element
+  const template = document.getElementById("albums-card-template");
+
+  // Loop through the list of albums
+  for (const album of data.items) {
+
+
+    const clone = template.content.cloneNode(true);
+    const albumCover = album.images[0].url;
+    const albumTitle = album.name;
+    const albumReleaseDate = album.release_date;
+    const albumId = album.id;
+    const albumHref = album.external_urls.spotify;
+    console.log(albumHref);
+
+
+
+    // Set the album cover image
+    const albumCoverElement = clone.querySelector(".album-cover");
+    albumCoverElement.src = albumCover;
+
+    // Set the album title
+    const albumTitleElement = clone.querySelector(".album-title");
+    albumTitleElement.innerHTML = albumTitle;
+
+    // Set the album release date
+    const albumReleaseDateElement = clone.querySelector(".album-release-date");
+    albumReleaseDateElement.innerHTML = `Released: ${albumReleaseDate}`;
+
+    // Set the album id
+    const albumCardElement = clone.querySelector(".album-card");
+    albumCardElement.setAttribute("data-album-id", albumId);
+
+    // Append the cloned template to the container
+    const albumCardsContainer = document.querySelector(".album-cards-container");
+    albumCardsContainer.appendChild(clone);
+  }
+}
+
+
+
 
 async function searchArtists(query) {
   const accessToken = await getAccessToken();
@@ -109,11 +161,17 @@ function openOverview(card) {
 }
 
 
-async function loadOverview() {
+async function getOverview() {
   const params = new URLSearchParams(window.location.search);
   const artistId = params.get("artistId");
   loadArtist(artistId);
  }
+
+ async function getAlbums() {
+   const params = new URLSearchParams(window.location.search);
+   const artistId = params.get("artistId");
+   loadAlbums(artistId);
+  }
 
 async function switchTabRelatedArtists() {
   const currentURL = new URL(window.location.href);

@@ -5,7 +5,7 @@
     <title>Albums</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body onload="getAlbums();">
     <div class="container">
       <header>
         <h1>Albums</h1>
@@ -25,7 +25,16 @@
       <main>
         <h2>Top Albums</h2>
         <ul id="albums-list">
-          <!-- Album items will be added here -->
+          <div class="album-cards-container">
+            <template id="albums-card-template">
+              <div class="album-card" data-album-id="">
+                <img src="" alt="Album 1 cover" class="album-cover">
+                <h3 class="album-title"></h3>
+                <p class="album-release-date"></p>
+              </div>
+            </template>
+          </div>
+
         </ul>
       </main>
     </div>
