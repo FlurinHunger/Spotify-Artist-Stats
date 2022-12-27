@@ -110,6 +110,85 @@ async function loadAlbums(artistId) {
 }
 
 
+async function loadPopularTracks(artistId) {
+  // First, we need to get an access token from the Spotify API
+  const accessToken = await getAccessToken();
+
+  // Next, we can use the access token to make a request to the Spotify API to get the artist's top tracks
+  const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=US`, {
+    headers: {
+      "Authorization": "Bearer " + accessToken,
+    },
+  });
+
+  // We can parse the response as JSON to get the array of tracks
+  const data = await response.json();
+  const tracks = data.tracks;
+
+  const template = document.getElementById("track-card-template");
+
+  // We can then iterate over the array of tracks and extract the information we need
+  for (let track of tracks) {
+    const clone = template.content.cloneNode(true);
+    const trackName = track.name;
+    const trackAlbum = track.album.name;
+    const trackReleaseDate = track.album.release_date;
+    const trackCoverImageUrl = track.album.images[0].url;
+
+    // Here, you can do something with the track information, such as displaying it on the page or saving it to a database.
+    // Set the track cover image
+    const trackCoverElement = clone.querySelector(".track-cover");
+    trackCoverElement.src = trackCoverImageUrl;
+
+    // Set the track title
+    const trackTitleElement = clone.querySelector(".track-title");
+    trackTitleElement.innerHTML = trackName;
+
+    //Set Album Name
+    const trackAlbumTitleElement = clone.querySelector(".album-name");
+    trackAlbumTitleElement.innerHTML = trackAlbum;
+
+    // Set the track release date
+    const trackReleaseDateElement = clone.querySelector(".track-release-date");
+    trackReleaseDateElement.innerHTML = `Released: ${trackReleaseDate}`;
+
+    // Append the cloned template to the container
+    const trackCardsContainer = document.querySelector(".track-cards-container");
+    trackCardsContainer.appendChild(clone);
+  }
+}
+
+async function loadRelatedArtists(artistId) {
+  const accessToken = await getAccessToken();
+
+  const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/related-artists`, {
+    headers: {
+      "Authorization": "Bearer " + accessToken,
+    },
+  });
+  const data = await response.json();
+
+  const relatedArtistsContainer = document.querySelector('.related-artist-cards-container');
+
+
+  // Iterate through the list of related artists
+  for (const relatedArtist of data.artists) {
+    // Create a new element using the template
+    const relatedArtistElement = document.querySelector('#related-artist-card-template').content.cloneNode(true);
+
+    // Set the values for the related artist
+    relatedArtistElement.querySelector('.related-artist-name').innerHTML = relatedArtist.name;
+    relatedArtistElement.querySelector('.related-artist-image').src = relatedArtist.images[0].url;
+    relatedArtistElement.querySelector('.related-artist-popularity').innerHTML = "Popularity: " + relatedArtist.popularity;
+    relatedArtistElement.querySelector('.related-artist-genre').innerHTML = relatedArtist.genres[0];
+
+    // Add the related artist element to the container
+    relatedArtistsContainer.appendChild(relatedArtistElement);
+  }
+}
+
+
+
 
 
 async function searchArtists(query) {
@@ -171,6 +250,18 @@ async function getOverview() {
    const params = new URLSearchParams(window.location.search);
    const artistId = params.get("artistId");
    loadAlbums(artistId);
+  }
+
+  async function getPopularTracks() {
+    const params = new URLSearchParams(window.location.search);
+    const artistId = params.get("artistId");
+    loadPopularTracks(artistId);
+  }
+
+  async function getRelatedArtists() {
+    const params = new URLSearchParams(window.location.search);
+    const artistId = params.get("artistId");
+    loadRelatedArtists(artistId);
   }
 
 async function switchTabRelatedArtists() {

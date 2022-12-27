@@ -5,7 +5,7 @@
     <title>Tracks</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body onload="getPopularTracks()">
     <div class="container">
       <header>
         <h1>Tracks</h1>
@@ -25,7 +25,16 @@
       <main>
         <h2>Top Tracks</h2>
         <ul id="tracks-list">
-          <!-- Track items will be added here -->
+          <div class="track-cards-container">
+            <template id="track-card-template">
+              <div class="track-card" data-track-id="">
+                <img src="" alt="track 1 cover" class="track-cover">
+                <h3 class="track-title"></h3>
+                <p class="album-name"></p>
+                <p class="track-release-date"></p>
+              </div>
+            </template>
+          </div>
         </ul>
       </main>
     </div>

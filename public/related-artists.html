@@ -5,7 +5,7 @@
     <title>Related Artists</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body onload="getRelatedArtists()">
     <div class="container">
       <header>
         <h1>Related Artists</h1>
@@ -25,7 +25,16 @@
       <main>
         <h2>Related Artists</h2>
         <ul id="related-artists-list">
-          <!-- Related artist items will be added here -->
+          <div class="related-artist-cards-container">
+            <template id="related-artist-card-template">
+              <div class="related-artist-card">
+                <img src="" alt="Artist image" class="related-artist-image">
+                <h3 class="related-artist-name"></h3>
+                <p class="related-artist-genre"></p>
+                <p class="related-artist-popularity"></p>
+              </div>
+            </template>
+          </div>
         </ul>
       </main>
     </div>

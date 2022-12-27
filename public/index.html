@@ -35,14 +35,11 @@
   <script src="get_json.js" charset="utf-8"></script>
   <script type="text/javascript">
     const searchForm = document.getElementById("search-form");
-
     searchForm.addEventListener("submit", (event) => {
     // Prevent the default form submission behavior
     event.preventDefault();
-
     // Get the artist name from the search form
     const artistNameSearch = document.getElementById("artist-name-search").value;
-
     // Search for artists
     searchArtists(artistNameSearch);
     });
