@@ -218,6 +218,7 @@ function renderArtistCards(artists) {
     const numStr = artistFollower.toString();
     const numChars = numStr.split('');
     const formatted = [];
+    
 
     for (let i = numChars.length - 1; i >= 0; i--) {
       formatted.unshift(numChars[i]);
